@@ -1,7 +1,7 @@
 {
-  "name": "Project assembly",
+  "name": "assembly",
   "version": "1.0.0",
-  "description": "Шаблон сборки",
+  "description": "Project assembly",
   "devDependencies": {
     "@htmlacademy/editorconfig-cli": "1.x",
     "autoprefixer": "9.5.x",
