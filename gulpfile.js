@@ -13,8 +13,20 @@ const svgstore = require(`gulp-svgstore`)
 const posthtml = require(`gulp-posthtml`);
 const include = require(`posthtml-include`);
 const del = require(`del`);
+const pump = require(`pump`);
+const concat = require(`gulp-concat`);
 // const rollup = require(`gulp-better-rollup`);
 // const sourcemaps = require(`gulp-sourcemaps`);
+
+gulp.task(`js-libs`, (cb) => {
+  pump([
+    gulp.src(`source/js/ext/*.js`),
+    concat(`vendor.js`),
+    // uglify(),
+    gulp.dest(`build/js/`)
+  ],
+    cb);
+});
 
 gulp.task(`scripts`, () => {
   return gulp.src(`source/js/**/*.js`)
@@ -116,5 +128,5 @@ gulp.task(`clean`, () => {
   return del(`build`);
 });
 
-gulp.task(`build`, gulp.series(`clean`, `copy`, `css-min`, `css`, `sprite`, `html`, `scripts`));
+gulp.task(`build`, gulp.series(`clean`, `copy`, `css-min`, `css`, `sprite`, `html`, `scripts`, `js-libs`));
 gulp.task(`start`, gulp.series(`build`, `server`));
